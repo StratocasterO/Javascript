@@ -55,66 +55,66 @@
 <input type="button" value="Reset">
 
 <script>
-	c1 = document.querySelector("#cuadro1")
-	c2 = document.querySelector("#cuadro2")
-	c3 = document.querySelector("#cuadro3")
-	c4 = document.querySelector("#cuadro4")
-	c5 = document.querySelector("#cuadro5")
-	c6 = document.querySelector("#cuadro6")
-	c7 = document.querySelector("#cuadro7")
-	c8 = document.querySelector("#cuadro8")
-	c9 = document.querySelector("#cuadro9")
-
 	let jugador = "X"
 
 	const ganador = () => {
-		if (c1.innerHTML != '' && c1.innerHTML == c2.innerHTML && c2.innerHTML == c3.innerHTML ||
-			c4.innerHTML != '' && c4.innerHTML == c5.innerHTML && c5.innerHTML == c6.innerHTML ||
-			c7.innerHTML != '' && c7.innerHTML == c8.innerHTML && c8.innerHTML == c9.innerHTML ||
-			c1.innerHTML != '' && c1.innerHTML == c4.innerHTML && c4.innerHTML == c7.innerHTML ||
-			c2.innerHTML != '' && c2.innerHTML == c5.innerHTML && c5.innerHTML == c8.innerHTML ||
-			c3.innerHTML != '' && c3.innerHTML == c6.innerHTML && c6.innerHTML == c9.innerHTML ||
-			c1.innerHTML != '' && c1.innerHTML == c5.innerHTML && c5.innerHTML == c9.innerHTML ||
-			c3.innerHTML != '' && c3.innerHTML == c5.innerHTML && c5.innerHTML == c7.innerHTML){
+		const c1 = document.querySelector("#cuadro1").innerHTML
+		const c2 = document.querySelector("#cuadro2").innerHTML
+		const c3 = document.querySelector("#cuadro3").innerHTML
+		const c4 = document.querySelector("#cuadro4").innerHTML
+		const c5 = document.querySelector("#cuadro5").innerHTML
+		const c6 = document.querySelector("#cuadro6").innerHTML
+		const c7 = document.querySelector("#cuadro7").innerHTML
+		const c8 = document.querySelector("#cuadro8").innerHTML
+		const c9 = document.querySelector("#cuadro9").innerHTML
+
+		if (c1 != '' && c1 == c2 && c2 == c3 ||
+			c4 != '' && c4 == c5 && c5 == c6 ||
+			c7 != '' && c7 == c8 && c8 == c9 ||
+			c1 != '' && c1 == c4 && c4 == c7 ||
+			c2 != '' && c2 == c5 && c5 == c8 ||
+			c3 != '' && c3 == c6 && c6 == c9 ||
+			c1 != '' && c1 == c5 && c5 == c9 ||
+			c3 != '' && c3 == c5 && c5 == c7){
 
 			if(jugador == "X") jugador = "O";
 			else jugador = "X";
 
-		document.querySelector(".aviso").innerHTML = `Ha ganado el jugador ${jugador}`;
-		document.querySelector(".aviso").style.display = "block";
+			document.querySelector(".aviso").innerHTML = `Ha ganado el jugador ${jugador}`;
+			document.querySelector(".aviso").style.display = "block";
 
-		document.querySelectorAll(".box").forEach(obj => {
-			obj.removeEventListener("click", jugada);
-		});
+			document.querySelectorAll(".box").forEach(obj => {
+				obj.removeEventListener("click", jugada);
+			});
+		};
 	};
-};
 
-const jugada = (e) => {		// coge el ID del evento "e" que ha llamado a la función
-const id = e.target.id;
-if (document.querySelector('#'+id).innerHTML == ""){
-	if (jugador == "X"){
-		document.querySelector('#'+id).innerHTML = "X";
-		jugador = "O";
-	} else {
-		document.querySelector('#'+id).innerHTML = "O";
-		jugador = "X";
+	const jugada = (e) => {		// coge el ID del evento "e" que ha llamado a la función
+	const id = e.target.id;
+	if (document.querySelector('#'+id).innerHTML == ""){
+		if (jugador == "X"){
+			document.querySelector('#'+id).innerHTML = "X";
+			jugador = "O";
+		} else {
+			document.querySelector('#'+id).innerHTML = "O";
+			jugador = "X";
+		};
+		ganador();
+	}
 	};
-	ganador();
-}
-};
 
-document.querySelectorAll(".box").forEach(obj => {
-	obj.addEventListener("click", jugada);
-});
-
-document.querySelector("input").addEventListener("click", () => {
-	document.querySelectorAll(".box").forEach(obj => {
-		obj.innerHTML = "";
-	});
 	document.querySelectorAll(".box").forEach(obj => {
 		obj.addEventListener("click", jugada);
 	});
-	document.querySelector(".aviso").style.display = "none";
-	jugador = "X";
-});
+
+	document.querySelector("input").addEventListener("click", () => {
+		document.querySelectorAll(".box").forEach(obj => {
+			obj.innerHTML = "";
+		});
+		document.querySelectorAll(".box").forEach(obj => {
+			obj.addEventListener("click", jugada);
+		});
+		document.querySelector(".aviso").style.display = "none";
+		jugador = "X";
+	});
 </script>

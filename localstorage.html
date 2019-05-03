@@ -1,0 +1,28 @@
+<div id="lista">
+	<ul contentEditable="true">
+		<li>item 1</li>
+		<li>item 2</li>
+		<li>item 3</li>
+		<li>item 4</li>
+	</ul>
+</div>
+
+<p>
+	<input type="button" id="salvarCambios" value="Salvar cambios">
+	<input type="button" id="borrar" value="Borrar cambios">
+</p>
+
+<script>
+	document.querySelector("#salvarCambios").addEventListener('click', () => {
+		localStorage.setItem("lista", document.querySelector("#lista").innerHTML);
+	});
+
+	document.querySelector("#borrar").addEventListener('click', () => {
+		localStorage.clear();
+		location.reload();
+	});
+
+	if (localStorage.getItem("lista")) {
+		document.querySelector("#lista").innerHTML = localStorage.getItem("lista");
+	}
+</script>
