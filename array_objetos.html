@@ -1,0 +1,68 @@
+<div class="lista" style="display: inline-block;"></div>
+<div class="lista_activos" style="display: inline-block;"></div>
+
+<script>
+	const usuarios = [
+		{
+			"name" : "Paco",
+			"isActive" : false
+		},
+		{
+			"name" : "Laura",
+			"isActive" : false
+		},
+		{
+			"name" : "Raquel",
+			"isActive" : false
+		},
+		{
+			"name" : "Juan",
+			"isActive" : true
+		},
+		{
+			"name" : "Alberto",
+			"isActive" : false
+		},
+		{
+			"name" : "Rodolfo",
+			"isActive" : true
+		},
+	];
+
+	dom = document.querySelector(".lista");
+	lista = "<ul>"
+
+	usuarios.forEach(obj => {
+		lista = lista + `<li>${obj.name}</li>`
+	});
+
+	lista = lista + "</ul>";
+	dom.innerHTML = lista;
+
+	
+</script>
+
+<script>
+	const data = [
+		{
+			nombre: 'leo',
+			descripcion: 'duro, pero cariñoso'
+		},
+		{
+			nombre: 'libra',
+			descripcion: 'lo mismo que los euros pero en inglés'
+		},
+		{
+			nombre: 'cáncer',
+			descripcion: 'una enfermedad horrible'
+		},
+	];
+
+	const valorSeleccionado = 'libra'
+
+	data.forEach(obj =>{
+		if(obj.nombre == valorSeleccionado){
+			console.log(obj.nombre + ': ' + obj.descripcion);
+		}
+	});
+</script>

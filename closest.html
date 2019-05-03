@@ -1,0 +1,23 @@
+<style>
+	*{
+		margin: 0;
+	}
+	input{
+		width: 100px;
+	}
+</style>
+
+<p><input type="button" value="Red"></p>
+<p><input type="button" value="Orange"></p>
+<p><input type="button" value="Yellow"></p>
+<p><input type="button" value="Green"></p>
+<p><input type="button" value="Blue"></p>
+<p><input type="button" value="Purple"></p>
+
+<script>
+	document.querySelectorAll("input").forEach(obj => {
+		obj.addEventListener("click", () => {
+			obj.closest("p").style.backgroundColor = obj.value;
+		});
+	});
+</script>

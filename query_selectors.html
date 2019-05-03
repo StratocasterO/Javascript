@@ -1,0 +1,70 @@
+<!-- lee el valor del campo de texto y lo usa en la función saludar -->
+
+<form>
+	Escribe tu nombre, por favor: <br>
+    <input type="text" id="Nombre" placeholder="Nombre aquí"> <br>
+    <input type="button" id="btn" value="Enviar formulario">
+</form>
+
+<script>
+	const saludar = _ => {
+		console.log(`Hola, ` + document.querySelector('#Nombre').value + `. ¿Qué tal estás?`);
+	}
+
+	document.querySelector('#btn').addEventListener('click', saludar);
+</script>
+
+<!-- ídem pero almacenando el valor en una variable -->
+
+<br>
+<form>
+	Escribe tu nombre, por favor: <br>
+    <input type="text" id="Nombre2" placeholder="Nombre aquí"><br>
+    <input type="button" id="btn2" value="Enviar formulario">
+</form>
+
+<script>
+	const saludar2 = _ =>{
+		const info = document.querySelector('#Nombre2').value
+		console.log(`Hola, ` + info + `. ¿Qué tal estás?`);
+	}
+
+	document.querySelector('#btn2').addEventListener('click', saludar2);
+</script>
+
+<!-- copia el texto del primer campo en el segundo usando una variable -->
+
+<br>
+<form>
+	Escribe tu nombre, por favor: <br>
+    <input type="text" id="campoNombre"> <br>
+    <input type="button" id="btn3" value="Enviar formulario"> <br>
+    <input type="text" id="campoNombre2">
+</form>
+
+<script>
+	const saludar3 = _ => {
+		const info = document.querySelector('#campoNombre').value;
+		document.querySelector('#campoNombre2').value = info;
+	}
+
+	document.querySelector('#btn3').addEventListener('click', saludar3);
+</script>
+
+<!-- copia el texto del primer campo en el segundo directamente -->
+
+<br>
+<form>
+	Escribe tu nombre, por favor: <br>
+    <input type="text" id="campoNombre3"><br>
+    <input type="button" id="btn4" value="Enviar formulario"><br>
+    <input type="text" id="campoNombre4">
+</form>
+
+<script>
+	const saludar4 = _ =>{
+		document.querySelector('#campoNombre4').value = document.querySelector('#campoNombre3').value;
+	}
+
+	document.querySelector('#btn4').addEventListener('click', saludar4);
+</script>

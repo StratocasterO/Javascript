@@ -1,0 +1,71 @@
+<style>
+	.cont{
+		width: 1024px;
+		margin: 100px auto 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.slider{
+		width: 256px;
+		height: 256px;
+		/*overflow: hidden;*/
+		border: 1px solid black;
+	}
+	.all{
+		width: 768px;
+		height: 256px;
+		transition: 1s;
+	}
+	.img{
+		display: inline-block;
+		transition: 1s;
+	}
+	.img:not(:nth-child(3n+1)){		/* empiezan todas paqueñas menos la primera */
+		opacity: 0;
+		transform: scale(0);
+	}
+	a{
+		color: black;
+	}
+</style>
+
+<div class="cont">
+	<div class="slider">
+		<div class="all">
+			<div class="img"><img src="img/tuxes/PinguLinux_Batman.png" alt=""></div><div class="img"><img src="img/tuxes/PinguLinux_Capitan_America.png" alt=""></div><div class="img"><img src="img/tuxes/PinguLinux_Superman.png" alt=""></div>
+		</div>
+	</div>
+ 	<br>
+	<a href="#" id="pulsa">Pulsa</a>
+</div>
+
+<script>
+	let i = 1;
+	let j = 2;
+	content = document.querySelector(".all").innerHTML;
+
+	document.querySelector("#pulsa").addEventListener("click", () => {
+		if(i%3 == 0){
+			document.querySelector(".all").style.width = (j+2)*768 + "px";
+			document.querySelector(".all").innerHTML = document.querySelector(".all").innerHTML + content;
+			i++;
+			j++;
+		}
+		else i++;
+		document.querySelector(".all").style.marginLeft = -256 * (i - 1);
+
+		// hace pequeños y transparentes todos los elementos
+		document.querySelectorAll('.img').forEach(obj => {	
+        	obj.style.opacity = 0;
+        	obj.style.transform = 'scale(0)';
+        });
+
+		// restaura el elemento activo
+		elemento = i;
+        const cosa = document.querySelector(".img:nth-child("+elemento+")");	
+		cosa.style.transform = "scale(1)";
+		cosa.style.opacity = "1";
+		elemento++;
+	});
+</script>

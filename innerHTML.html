@@ -1,0 +1,24 @@
+<div id="hola" style="background-color: grey; color: white; width: 200px; height: 200px">
+	<input type="button" id="boton">
+</div>
+
+<script>
+	const anadeHtml = _ => {
+		document.querySelector("#hola").innerHTML = "<h1>Hola</h1>";
+	}
+
+	document.querySelector("#boton").addEventListener("click", anadeHtml);
+</script>
+<br>
+
+<div id="div1" style="vertical-align: top; display: inline-block; color: white; background-color: purple; width: 200px; height: 200px"></div>
+<div id="div2" style="vertical-align: top; display: inline-block; color: white; background-color: green; width: 200px; height: 200px"></div>
+
+<script>
+	const mouseOver = (id, color) => {
+				document.querySelector(id).innerHTML = `<h1>Has tocado la capa ${color}</h1>`;
+	}
+
+	document.querySelector("#div1").addEventListener("mouseover", () => mouseOver("#div2", "morada"));
+	document.querySelector("#div2").addEventListener("mouseover", () => mouseOver("#div1", "verde"));
+</script>

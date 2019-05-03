@@ -1,0 +1,15 @@
+<script>
+	console.log(`Número random de 0 a 1: ` + Math.random()); // intervalo [0,1)
+
+	console.log(`Número random de 1 a 100: ` + Math.floor(Math.random()*101));
+
+	console.log(`Número random de 30 a 70: ` + Math.floor(Math.random()*(71-30)+30));
+
+	// elegir una letra al azar de una palabra
+
+	word = "Pablo";
+	i = Math.floor(Math.random()*(word.length));
+	letra = word.substring(i,i+1)
+
+	console.log(`"` + letra.toLowerCase() + `" es una letra de la palabra "` + word + `"`);
+</script>

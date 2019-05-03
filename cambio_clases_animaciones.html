@@ -1,0 +1,196 @@
+<link rel="stylesheet" type="text/css" href="animate.css"/>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+<style>
+	*{
+		margin: 0;
+	}
+	.cont{
+		width: calc(20px + (20px + 150px)*3);
+		padding-left: 20px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.cont div{
+		text-align: center;
+	}
+	div.caja{
+		height: 150px;
+		width: 150px;
+		margin: 30px 10px 10px 10px;
+	}
+	.rojo{
+		background-color: pink;
+	}
+	.azul{
+		background-color: lightblue;
+	}
+	.verde{
+		background-color: lightgreen;
+	}
+
+	nav{
+		width: 200px;
+		height: 600px;
+		background-color: rgba(165,165,165,1);
+		position: fixed;
+		right: 0px;
+		padding-top: 80px;
+		transition: 1s;
+	}
+	.oculto{
+		background-color: rgba(165,165,165,0);
+		right: -200px;
+		transition: 1s;
+	}
+
+	.oculto a{
+		color: rgba(71,71,71,0);
+		transition: 1s;
+	}
+	.abrir{
+		height: 50px;
+		width: 50px;
+		position: fixed;
+		right: 0;
+		top: 0;
+		background-color: #666666;
+		text-align: center;
+		color: rgba(165,165,165,1);
+	}
+	ul{
+		list-style: none;
+		padding-left: 30px;
+	}
+	ul li a{
+		color: #474747;
+		transition: 1s;
+		text-decoration: none;
+		font-variant: small-caps;
+	}
+	li{
+		padding: 10px 0;
+	}
+	.carga{
+		width: calc(20px + (20px + 150px)*3); /* margin + cajas */
+		height: 317px;
+		border: 1px solid black;
+		margin-top: 20px;
+		overflow: hidden;
+		position: relative;
+	}
+	.visible{
+		opacity: 1;
+		transition: 2s;
+	}
+	.invisible{
+		transition: 1s;
+		opacity: 0;
+	}
+	.wrapper{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+	}
+</style>
+
+<body>
+	<nav class="oculto">
+		<div class="abrir"><i class="fas fa-bars" style="font-size: 2em; padding-top: 9px"></i></div>
+
+		<div>
+			<ul>
+				<li><a href="#">Enlace</a></li>
+				<li><a href="#">Enlace</a></li>
+				<li><a href="#">Enlace</a></li>
+				<li><a href="#">Enlace</a></li>
+				<li><a href="#">Enlace</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="cont">
+		<div>
+			<div class="rojo caja"></div>
+			<input type="button" id="b_rojo" value="Animar">
+		</div>
+		
+		<div>
+			<div class="azul caja"></div>
+			<input type="button" id="b_azul" value="Animar">
+		</div>
+		
+		<div>
+			<div class="verde caja"></div>
+			<input type="button" id="b_verde" value="Animar">
+		</div>
+
+		<div class="carga">
+			<img class="gato invisible" src="https://wakyma.com/blog/wp-content/uploads/2017/08/Hablamos-de-la-incontinencia-urinaria-en-gatos-770x460." style="width: calc(20px + (20px + 150px)*3)" alt="">
+
+			<div class="wrapper">
+				<img src="indicador_precarga_circle.svg" style="width: 300px" alt="">
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	// Añadir clase: 	obj.classList.add('nombreClase');
+	// Eliminar clase: 	obj.('nombreClase');
+	// Añador/eliminar: obj.classList.toggle('nombreClase');
+	// Comprobar: 		obj.classList.contains('thatClass')
+
+	const rojo = document.querySelector(".rojo");
+	const azul = document.querySelector(".azul");
+	const verde = document.querySelector(".verde");
+
+	const b_rojo = document.querySelector("#b_rojo");
+	const b_azul = document.querySelector("#b_azul");
+	const b_verde = document.querySelector("#b_verde");
+
+	const animacion = (box, anim) => {
+		box.classList.add('animated');
+		box.classList.add(anim);
+
+		//Elimina la clase después de un segundo:
+
+		//	setTimeout(() =>{                         
+		//		box.classList.remove('animated');
+		//		box.classList.remove(anim);
+		//	}, 1000);
+
+		// Elimina la clase al terminar la animación:
+
+		box.addEventListener('animationend', () => {	
+			box.classList.remove('animated');
+			box.classList.remove(anim);
+		});
+	}
+
+	b_rojo.addEventListener("click", () => {animacion(rojo,'bounce')});
+	b_azul.addEventListener("click", () => {animacion(azul,'flash')});
+	b_verde.addEventListener("click", () => {animacion(verde,'bounceIn')});
+
+	// las funciones dentro del método addEventListener no pueden tener argumentos,
+	// por eso llamo a una función anónima que llama a la otra
+
+	document.querySelector(".abrir").addEventListener("click", (event) => {
+		event.stopPropagation();
+		document.querySelector("nav").classList.toggle('oculto');
+	})
+
+	window.addEventListener('click', () => { 
+		document.querySelector("nav").classList.add('oculto');
+	});
+
+	window.addEventListener('load', () => {
+		
+		setTimeout(() => {
+			document.querySelector('.carga .gato').classList.remove('invisible');
+			document.querySelector('.carga .gato').classList.add('visible');
+			document.querySelector('.wrapper').classList.add('invisible');
+		},2000);
+	});
+</script>

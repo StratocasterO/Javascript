@@ -1,0 +1,49 @@
+<script>
+	function cubo(n){
+		console.log(`${n} al cubo es ` + n*n*n);
+	}
+
+	function velocidad(v){
+		console.log(`${v} km/h son ` + (v/3.6).toFixed(1) + ` m/s`);
+	}
+
+	function rectangulo(a,b){
+		console.log(`El area de un rectangulo de lados ${a} y ${b} es ` + a*b);
+	}
+
+	function triangulo(a,b){
+		console.log(`El area de un triángulo de base ${a} y altura ${b} es ` + a*b/2);
+	}
+
+	function circulo(r) {
+		console.log(`El area de un circulo de radio ${r} es ` + (Math.PI*r*r).toFixed(1) + ` y su perímetro es ` + (2*Math.PI*r).toFixed(1));
+	}
+
+	cubo(3);
+	velocidad(300);
+	rectangulo(5,9);
+	triangulo(5,18);
+	circulo(4);
+
+	// funciones flecha
+
+	const devolver1 = _ => 10	//
+								//
+	const devolver2 = () => 10	//
+								//  Funciones equivalentes sin parámetros
+	function devolver3(){		//
+		return 10				//
+	}							//
+
+
+	const devolver4 = (a,b) => a*b 	//
+									//
+	const devolver5 = (a,b) => {	//
+		return a*b 					//
+	}								//  Funciones equivalentes con parámetros
+									//
+	function devolver6(a,b){		//	
+		return a*b 					//
+	}								//
+
+</script>

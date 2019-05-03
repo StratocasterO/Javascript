@@ -1,0 +1,38 @@
+<form>
+	<fieldset>
+		<legend>Diseño</legend>
+		<input checked type="radio" name="item1" value="100"> El cliente me suministra el diseño <br>
+		<input type="radio" name="item1" value="450"> Yo me encargo del diseño
+	</fieldset>
+	<fieldset>
+		<legend>Tienda</legend>
+		<input checked type="radio" name="item2" value="100"> La página no tiene carrito de la compra <br>
+		<input type="radio" name="item2" value="300"> La página incorpora un carrito de la compra
+	</fieldset>
+	<fieldset>
+		<legend>Membership</legend>
+		<input checked type="radio" name="item3" value="100"> La página tiene un servicio de suscripción <br>
+		<input type="radio" name="item3" value="220"> La página no tiene servicio de suscripción
+	</fieldset> <br>
+
+	<div id="coste" style="background-color: lightgreen; padding: 50px; font-size: 3em">300 €</div>
+</form>
+
+<script>
+	// suma todos los value de los radio seleccionados
+	const evaluar = () => {
+		checked = document.querySelectorAll("input[type=radio]:checked")
+		let coste = 0;
+		checked.forEach(obj => {
+			coste = coste + parseInt(obj.value);
+			document.querySelector("#coste").innerHTML = `${coste} €`;
+		})
+	}
+
+	// dispara la función evaluar cada vez que se haga click en un radio
+	const input = document.querySelectorAll("input[type=radio]")
+
+	input.forEach(obj => {
+		obj.addEventListener("click", evaluar);
+	});
+</script>

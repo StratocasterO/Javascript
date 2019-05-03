@@ -1,0 +1,120 @@
+<style>
+	body{
+		text-align: center;
+	}
+	.cont{
+		margin: auto;
+		margin-top: 40px;
+		display: inline-grid;
+		grid-template-columns: 210px 210px 210px;
+	}
+	.box{
+		width: 200px;
+		height: 190px;
+		background-color: lightgray;
+		margin: 5px;
+		font-size: 10em;
+		font-family: Arial;
+		padding-top: 10;
+	}
+	input{
+		display: block;
+		margin: auto;	
+		margin-top: 30px;
+	}
+	.aviso{
+		display: none;
+		position: absolute;
+		width: 500px;
+		height: 100px;
+		top: 210px;
+		left: calc(50vw - 250px);
+		margin: auto;
+		background-color: white;
+		border: 1px solid black;
+		font-family: Arial;
+		font-size: 2.8em;
+		padding-top: 50px
+	}
+</style>
+
+<div class="cont">
+	<div class="box" id="cuadro1"></div>
+	<div class="box" id="cuadro2"></div>
+	<div class="box" id="cuadro3"></div>
+	<div class="box" id="cuadro4"></div>
+	<div class="box" id="cuadro5"></div>
+	<div class="box" id="cuadro6"></div>
+	<div class="box" id="cuadro7"></div>
+	<div class="box" id="cuadro8"></div>
+	<div class="box" id="cuadro9"></div>
+</div>
+
+<div class="aviso"></div>
+
+<input type="button" value="Reset">
+
+<script>
+	c1 = document.querySelector("#cuadro1")
+	c2 = document.querySelector("#cuadro2")
+	c3 = document.querySelector("#cuadro3")
+	c4 = document.querySelector("#cuadro4")
+	c5 = document.querySelector("#cuadro5")
+	c6 = document.querySelector("#cuadro6")
+	c7 = document.querySelector("#cuadro7")
+	c8 = document.querySelector("#cuadro8")
+	c9 = document.querySelector("#cuadro9")
+
+	let jugador = "X"
+
+	const ganador = () => {
+		if (c1.innerHTML != '' && c1.innerHTML == c2.innerHTML && c2.innerHTML == c3.innerHTML ||
+			c4.innerHTML != '' && c4.innerHTML == c5.innerHTML && c5.innerHTML == c6.innerHTML ||
+			c7.innerHTML != '' && c7.innerHTML == c8.innerHTML && c8.innerHTML == c9.innerHTML ||
+			c1.innerHTML != '' && c1.innerHTML == c4.innerHTML && c4.innerHTML == c7.innerHTML ||
+			c2.innerHTML != '' && c2.innerHTML == c5.innerHTML && c5.innerHTML == c8.innerHTML ||
+			c3.innerHTML != '' && c3.innerHTML == c6.innerHTML && c6.innerHTML == c9.innerHTML ||
+			c1.innerHTML != '' && c1.innerHTML == c5.innerHTML && c5.innerHTML == c9.innerHTML ||
+			c3.innerHTML != '' && c3.innerHTML == c5.innerHTML && c5.innerHTML == c7.innerHTML){
+
+			if(jugador == "X") jugador = "O";
+			else jugador = "X";
+
+		document.querySelector(".aviso").innerHTML = `Ha ganado el jugador ${jugador}`;
+		document.querySelector(".aviso").style.display = "block";
+
+		document.querySelectorAll(".box").forEach(obj => {
+			obj.removeEventListener("click", jugada);
+		});
+	};
+};
+
+const jugada = (e) => {		// coge el ID del evento "e" que ha llamado a la función
+const id = e.target.id;
+if (document.querySelector('#'+id).innerHTML == ""){
+	if (jugador == "X"){
+		document.querySelector('#'+id).innerHTML = "X";
+		jugador = "O";
+	} else {
+		document.querySelector('#'+id).innerHTML = "O";
+		jugador = "X";
+	};
+	ganador();
+}
+};
+
+document.querySelectorAll(".box").forEach(obj => {
+	obj.addEventListener("click", jugada);
+});
+
+document.querySelector("input").addEventListener("click", () => {
+	document.querySelectorAll(".box").forEach(obj => {
+		obj.innerHTML = "";
+	});
+	document.querySelectorAll(".box").forEach(obj => {
+		obj.addEventListener("click", jugada);
+	});
+	document.querySelector(".aviso").style.display = "none";
+	jugador = "X";
+});
+</script>

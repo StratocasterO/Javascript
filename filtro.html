@@ -1,0 +1,94 @@
+<style>
+	.cont{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+	.box{
+		height: 130px;
+		width: 200px;
+		border: 1px solid black;
+		margin: 10px;
+		font-size: 3em;
+		padding-top: 70px;
+		text-align: center;
+		transition: 1s;
+		overflow: hidden;
+	}
+	.rojo{
+		background-color: pink;
+	}
+	.azul{
+		background-color: lightblue;
+	}
+	.amarillo{
+		background-color: lightyellow;
+	}
+	.verde{
+		background-color: lightgreen;
+	}
+</style>
+
+
+Elige qué elementos quieres que se muestren: <br>
+<ul>
+	<li><a href="#todos">Todos</a></li>
+	<li><a href="#rojo">Rojos</a></li>
+	<li><a href="#azul">Azules</a></li>
+	<li><a href="#verde">Verdes</a></li>
+	<li><a href="#amarillo">Amarillos</a></li>
+</ul>
+
+<div class="cont">
+	<div class="box rojo">1</div>
+	<div class="box azul">2</div>
+	<div class="box verde">3</div>
+	<div class="box rojo">4</div>
+	<div class="box rojo">5</div>
+	<div class="box amarillo">6</div>
+	<div class="box amarillo">7</div>
+	<div class="box verde">8</div>
+	<div class="box azul">9</div>
+	<div class="box amarillo">10</div>
+	<div class="box verde">11</div>
+	<div class="box amarillo">12</div>
+	<div class="box rojo">13</div>
+	<div class="box amarillo">14</div>
+	<div class="box azul">15</div>
+	<div class="box amarillo">16</div>
+	<div class="box verde">17</div>
+	<div class="box verde">18</div>
+	<div class="box rojo">19</div>
+	<div class="box amarillo">20</div>
+	<div class="box azul">21</div>
+	<div class="box azul">22</div>
+	<div class="box verde">23</div>
+	<div class="box rojo">24</div>
+</div>
+
+<script>
+	document.querySelectorAll("a").forEach(obj => {
+		obj.addEventListener("click", (event) => {
+			event.preventDefault();
+			filtro = obj.getAttribute("href").slice(1);
+			elementos = document.querySelectorAll(".box");
+			elementos.forEach(obj => {
+				if(filtro == "todos"){
+					obj.style.width = "200px";
+					obj.style.border = "1px solid black";
+					obj.style.margin = "10px";
+				} else if (obj.classList.contains(filtro)) {
+					obj.style.width = "200px";
+					obj.style.border = "1px solid black";
+					obj.style.margin = "10px";
+				} else {
+					obj.style.width = "0";
+					obj.style.border = "none";
+					obj.style.margin = "10px 0";
+				}
+			});
+		});
+	});
+
+
+</script>

@@ -1,0 +1,95 @@
+Cuales de los siguientes lenguajes son orientados a objetos? <br>
+<span class="respuesta">Java</span>, VB6, <span class="respuesta">C++</span>,C, <span class="respuesta">C#</span>, Cobol	<br><br>
+
+<input type="button" value="ver resultado" id="boton">	<br><br>
+
+<!-- ejercicio formulario con método closest: https://pablomonteserin.com/curso/javascript-es6/arrays -->
+
+<script>
+
+// devuelve por consola el día de la semana
+
+let days = ["domingo", "lunes", "martes", "miercoles", "jueves", "viernes", "sabado"];
+let dayNumber = new Date().getDay();
+console.log("Hoy es " + days[dayNumber]);
+
+// métodos para añadir y eliminar elementos de un array
+
+let datos = ['pera', 'manzana', 'naranja'];
+
+console.log(datos);			// Muestra el array por la consola
+
+console.log(datos.join());	// Muestra el array convirtiendolo en texto
+
+datos.push('fresa'); 		// Añade elemento al final
+console.log(datos);
+
+datos.pop(); 				// Elimina el último elemento
+console.log(datos);
+
+datos.splice(1,1) ;		// Elimina un rango de elementos
+console.log(datos);			// (el primer número es donde empieza y el segundo cuantos elimina)
+
+datos.splice(1,0,"madroño"); 	// Añade un elemento en la posición indicada
+console.log(datos);
+
+datos.forEach(value => {
+console.log(value + " es una fruta");	// Recorre todos los elementos
+});
+
+const recorrer = (value, indice) => {						// Otra manera de hacer lo mismo
+	console.log(indice + " " + value + " es una fruta");	// (el segundo argumento es, por defecto,
+};															// el índice de los elementos)
+datos.forEach(recorrer);
+
+// El return del método .querySelectorAll() es un array al que le podemos aplicar métodos de array
+
+document.querySelector('#boton').addEventListener("click", () => {
+	document.querySelectorAll('.respuesta').forEach((obj, i) => {
+		obj.style.backgroundColor = 'lightgreen';
+	});
+});
+
+nombres = ["Omar", "Eric", "Ana", "Fanny", "Marc"];  // recorre los elementos
+nombres.forEach((name) => {console.log("Conozco a alguien llamado " + name)});
+
+// hace un array con el doblel doble
+my_list = [1,9,3,8,5,7];	
+my_double_list = [];
+my_list.forEach((num) => {my_double_list.push(num*2)});
+console.log(`El doble de ${my_list} es ${my_double_list}`);
+
+// cuenta los positivos, negativos y ceros
+my_list2 = [11,-3,11,8,8,9,10,-15,-6,-11,-6,10,9,13,3,13,7,14,0,11,2,9,5,-7,12];	
+let pos = 0;
+let neg = 0;
+let zero = 0;
+my_list2.forEach((num) => {
+	if(num<0) neg++;
+	else if(num>0) pos++;
+	else zero++;
+});
+console.log(`En la lista hay ${pos} números positivos, ${neg} negativos y ${zero} ceros`);
+
+// hace la media de los positivos y los negativos por separado
+my_list3 = [-3,-15,-2,7,-9,-8,10,-15,-1,14,1,9,-5,-7,10,-7,6,-11,-4,1,15,-4,-6,13,6];
+let posi = [];
+let nega = [];	
+let sum_nega = 0;
+let sum_posi = 0;
+my_list2.forEach((num) => {
+	if(num<0){
+		nega.push(num);
+		sum_nega += num;
+	}
+	else if(num>0){
+		posi.push(num);
+		sum_posi += num;
+	}
+});
+let media_pos = sum_posi / posi.length;
+let media_neg = sum_nega / nega.length;
+console.log(`La media de los números positivos de la lista es ${media_pos.toFixed(2)} y la de los negativos es ${media_neg}`);
+
+
+</script>

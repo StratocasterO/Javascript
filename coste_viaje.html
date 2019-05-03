@@ -1,0 +1,82 @@
+<style>
+	div{
+		width: 220px;
+		display: inline-block;
+	}
+</style>
+
+<h1>Coste viaje</h1>
+
+<form>
+	<div>Introduzca el número de noches</div>
+	<input type="text" id="noches">
+	<select name="city" id="city">
+		<option value="Oviedo">Oviedo</option>
+		<option value="Tokio">Tokio</option>
+		<option value="Madrid">Madrid</option>
+		<option value="Barcelona">Barcelona</option>
+	</select>
+	<input type="button" value="Calcular coste" id="calc">
+	<br><br>
+
+	<div>Coste hotel:</div>
+	<input type="text" id="hotel"> €<br>
+	<div>Coste viaje:</div>
+	<input type="text" id="avion"> €<br>
+	<div>Coste alquiler coche:</div>
+	<input type="text" id="coche"> €<br><br>
+	<div>Coste total:</div>
+	<input type="text" id="total"> €<br>
+</form>
+
+<script>
+	const coste_alquiler_coche = (num_dias) => {
+		var coste_sin_descuento = 40*num_dias;
+		var coste_con_descuento = 0;
+		if(num_dias >= 7){
+			coste_con_descuento = coste_sin_descuento-50;
+		}else if(num_dias >= 3){
+			coste_con_descuento = coste_sin_descuento-20;
+		}else{
+			coste_con_descuento = coste_sin_descuento;
+		}
+
+		return coste_con_descuento;
+	}
+
+	const coste_avion = (ciudad) => {
+		var coste_avion=0;
+		if(ciudad=="Oviedo"){
+			coste_avion=15;
+		}else if(ciudad=="Tokio"){
+			coste_avion=700;
+		}else if(ciudad=="Madrid"){
+			coste_avion=90;			
+		}else if(ciudad=="Barcelona"){
+			coste_avion=90;			
+		}
+		return coste_avion;
+	}
+
+	const coste_hotel = (noches) => {
+		let precio_hotel = noches * 140;
+		return precio_hotel;
+	}
+
+	const coste_total = (hotel, avion, coche) => {
+		r_total = coste_hotel(hotel) + coste_avion(avion) + coste_alquiler_coche(coche);
+		return r_total; 
+	}
+
+	const mostrar = _ => {
+		let ciutat = document.querySelector("#city").value;
+		let noches = document.querySelector("#noches").value;
+
+		document.querySelector("#hotel").value = coste_hotel(noches);
+		document.querySelector("#avion").value = coste_avion(ciutat);
+		document.querySelector("#coche").value = coste_alquiler_coche(noches);
+		document.querySelector("#total").value = coste_total(noches,ciutat,noches);
+	}
+
+	document.querySelector("#calc").addEventListener("click", mostrar);
+</script>

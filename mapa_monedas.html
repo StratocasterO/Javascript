@@ -1,0 +1,17 @@
+<div id="mapa" 	style="position: relative; margin: auto; margin-top: 200px; height: 483px; width: 725px; background-image: url(img/mapa.jpg)">
+	
+</div>
+
+<script>
+	const generar = _ => {
+		coins = "";
+
+		for (var i = 1; i <= 20; i++) {
+			coins = coins + '<img src="img/moneda.png" style="height: 40px; width: 40px; position: absolute; top: ' + Math.floor(Math.random()*(483-40)) + 'px; left: ' + Math.floor(Math.random()*(725-40)) + 'px">\n';
+		}
+		console.log(coins);
+		document.querySelector("#mapa").innerHTML = coins;
+	}
+
+	window.addEventListener("load", generar);
+</script>

@@ -1,0 +1,127 @@
+<style>
+	.cont{
+		width: 500px;
+		margin: auto;
+		text-align: center;
+	}
+	#palabra{
+		font-size: 2.5em;
+	}
+	.imagen{
+		height: 330px;
+		width: 300px;
+		background-image: url(img/hangman-game_pm.png);
+		margin: 15px auto;
+	}
+	.respuesta{
+		margin: 30px auto;
+		border: 1px solid black;
+		width: 300px;
+	}
+</style>
+
+<div class="cont">
+	Introduce una letra y pulsa el botón para comprobar <br>
+	si está contenida en la palabra secreta: <br><br>
+
+	<input type="text" id="letra" style="width: 20px; margin-right: 5px;"><input type="button" id="enviar" value="Enviar letra"><br><br>
+	
+	<span id="palabra">PALABRA</span>
+	<div class="imagen"></div>
+	<div class="respuesta">Introduce una letra</div>
+
+	<input type="button" id="reset" value="Reiniciar juego">
+</div>
+
+<script>
+	const palabras = ["AHORCADO","ANIMAR","SUPERHEROE","MONTESERIN","PABLO","JAVASCRIPT","PALABRA","INTERNET"]
+
+	const prohibidas = ["1","2","3","4","5","6","7","8","9","0","!","?","¿","*","+","-","/","(",")"]
+
+	// inicializa la palabra secreta:
+	const seleccionar_palabra = () => {
+		let index = Math.floor(Math.random()*palabras.length);
+		return palabras[index];
+	}
+
+	let palabra_secreta = seleccionar_palabra();
+	console.log(palabra_secreta);
+
+	// la convierte a guiones y la muestra en la pantalla:
+	const guiones = (word) => {
+		let linea = '';
+		for (let i=0; i<word.length; i++) {
+			linea = linea + '_ '
+		}
+		return linea;
+	}
+
+	let palabra_guiones = guiones(palabra_secreta);
+	document.querySelector("#palabra").innerHTML = palabra_guiones;
+
+	// evalúa si la palabra contiene la letra:
+	let intentos = 3;
+
+	const sustituir = (letter, word) =>{
+		for (let i=0; i<=word.length; i++) {
+			if(word.charAt(i) == letter) {
+				palabra_guiones = palabra_guiones.substr(0,i*2) + letter + " " + palabra_guiones.substr(i*2+2);
+				// el índice multipolicado por dos porque cada guión es un guión y un espacio
+			}
+		}
+	}
+
+	const comprobar = () => {
+		let alerta = document.querySelector(".respuesta");
+		let letra = document.querySelector("#letra");
+		letra = letra.value.toUpperCase();
+
+		// comprueba que queden intentos, la letra sea un caracter y no sea uno de los caracteres prohibidos:
+		if (intentos > 0 && letra.length == 1 && !prohibidas.includes(letra)){
+			if (!palabra_secreta.includes(letra)){
+				if (intentos != 1) alerta.innerHTML = `¡Error! Te quedan ${intentos} intentos`;
+				else alerta.innerHTML = `¡Error! Te queda ${intentos} intento`;
+				intentos--;
+				console.log("error");
+			} else {
+				sustituir(letra, palabra_secreta);
+				document.querySelector("#palabra").innerHTML = palabra_guiones;
+				if (intentos != 1) alerta.innerHTML = `¡Has acertado! Te quedan ${intentos} intentos`;
+				else alerta.innerHTML = `¡Has acertado! Te queda ${intentos} intento`;
+				console.log("acierto");
+			}
+		} else if (intentos > 0 && letra == '') {
+				alerta.innerHTML = 'Introduce una letra';
+				console.log("letra vacia o caracter incorrecto");
+		} else if (prohibidas.includes(letra)) {
+				alerta.innerHTML = 'Eso no es una letra';
+				console.log("caracter incorrecto");
+		} else if (intentos > 0 && letra.length > 1){
+				alerta.innerHTML = 'Introduce sólo una letra';
+				console.log("varias letras");
+		} else {
+			alerta.innerHTML = '¡Has perdido!';
+			intentos--;
+		}
+
+		movimiento = intentos - 3;
+		position = movimiento*1550/5 + 'px';
+		document.querySelector(".imagen").style.backgroundPosition = position;
+
+		if(!palabra_guiones.includes("_")) alerta.innerHTML = '¡Has ganado!';
+	}
+
+	document.querySelector("#enviar").addEventListener("click",() => {
+		if(intentos!=-1) comprobar();
+	});
+
+	document.querySelector("#reset").addEventListener("click", () => {
+		palabra_secreta = seleccionar_palabra();
+		console.log(palabra_secreta);
+		palabra_guiones = guiones(palabra_secreta);
+		document.querySelector("#palabra").innerHTML = palabra_guiones;
+		intentos = 3;
+		document.querySelector(".respuesta").innerHTML = "Introduce una letra"
+		document.querySelector(".imagen").style.backgroundPosition = "0px";
+	});
+</script>

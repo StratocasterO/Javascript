@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Parallax</title>
+
+	<style>
+		body{
+			margin:0; 
+			background: url(img/manzana.jpg) fixed;
+			background-size: 150px 150px;
+		}
+		.pinas_and_oranges{ 
+			position: fixed; 
+			width: 100%; 
+			height: 1800px; 
+		}
+		.contentLayer{ 
+			position: absolute; 
+			width: 100%; 
+			height: 500px; 
+		}
+		#pinas{ 
+			background: url(img/pina.png);
+			background-size: 200px 200px;
+			height: 5000px;
+		}
+		#oranges{ 
+			background: url(img/naranja.png) 100px 100px; 
+			background-size: 150px 150px;
+			height: 5000px;
+		}
+		#greenLayer{ 
+			top:5000px; 
+		}
+	</style>
+</head>
+<body>	
+	<div id="oranges" class="pinas_and_oranges"></div>
+	<div id="pinas" class="pinas_and_oranges"></div>
+	<div id="greenLayer" class="contentLayer"></div> 	<!-- para que la página sea larga -->
+</body>
+</html>
+
+<script>
+	parallax = _ => {
+		pinas.style.top = -(window.pageYOffset / 4) + "px";
+		oranges.style.top = -(window.pageYOffset / 8) + "px";
+	}
+
+	start = _ => {
+		pinas = document.querySelector("#pinas");
+		oranges = document.querySelector("#oranges");
+	}
+
+	window.addEventListener("scroll", parallax);
+	window.addEventListener("load", start);
+</script>

@@ -1,0 +1,43 @@
+Estos <span class="rojo">botones</span> pintan <span class="verde">palabras</span> de <span class="azul">colores</span> <br>
+
+<button id="r">Rojo</button> 
+<button id="g">Verde</button> 
+<button id="b">Azul</button>
+
+<br><br>
+
+<select name="color" id="color">
+	<option value="white">Blanco</option>
+	<option value="lightgrey">Gris</option>
+	<option value="grey">Gris oscuro</option>
+</select>
+
+<br><br>
+
+<img src="img/naranja.png" width="300px" alt="">
+
+<script>
+	document.querySelector("#r").addEventListener("click", () => {document.querySelector(".rojo").style.backgroundColor = 'pink'});
+
+	document.querySelector("#g").addEventListener("click", () => {document.querySelector(".verde").style.backgroundColor = 'lightgreen'});
+
+	document.querySelector("#b").addEventListener("click", () => {document.querySelector(".azul").style.backgroundColor = 'lightblue'});
+
+	// para elementos con ID se puede escribir hola.metodos() en lugar de document.querySelector("#hola").metodos()
+
+	document.querySelector("#color").addEventListener("change", () => {
+		document.querySelector("body").style.background = document.querySelector("#color").value
+	});
+
+	let foto = false;
+
+	document.querySelector("img").addEventListener("click", () => {
+		if(foto == false){
+			document.querySelector("img").src = "img/pina.png";
+			foto = !foto;
+		} else {
+			document.querySelector("img").src = "img/naranja.png";
+			foto = !foto;
+		}
+	});
+</script>

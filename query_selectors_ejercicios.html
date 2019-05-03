@@ -1,0 +1,94 @@
+<style>
+	div.caja{
+		line-height: 2em;
+	}
+	div.caja .radio{
+		line-height: 1.0em;
+		padding: .5em 0;
+	}
+	div.caja textarea{
+		line-height: 1.0em;
+	}
+</style>
+
+<form>
+	<b>Convertidor de grados Fahrenheit y Celsius:</b> <br><br>
+	<input type="text" id="cel" placeholder="Temperatura en ºC">
+	<input type="button" id="ctof" value="Transforma a ºF">
+	<input type="text" id="far" placeholder="Temperatura en ºF"> <br>
+
+	<input type="text" id="far2" placeholder="Temperatura en ºF"> 
+	<input type="button" id="ftoc" value="Transforma a ºC">
+	<input type="text" id="cel2" placeholder="Temperatura en ºC"> <br><br><br>
+
+	<b>Convertidor de dólares y euros: </b><br><br>
+
+	<input type="text" id="eur" placeholder="Euros">
+	<input type="button" id="etod" value="Convierte a dólares">
+	<input type="text" id="usd" placeholder="Dólares"> <br>
+
+	<input type="text" id="usd2" placeholder="Dólares"> 
+	<input type="button" id="dtoe" value="Transforma a euros">
+	<input type="text" id="eur2" placeholder="Euros"> <br><br><br>
+	
+	<b>Formulario de pedido online:</b> <br><br>
+	<div class="caja">
+		Nombre:
+		<input type="text" id="nombre" placeholder="Nombre"> <br>
+		Material de la caja:
+		<select name="" id="material">
+			<option value="madera">Madera</option>
+			<option value="plástico">Plástico</option>
+			<option value="aluminio">Aluminio</option>
+		</select> <br>
+		<div class="radio">
+			Dimensiones de la caja: <br>
+			<input type="radio" value="pequeña" name="size" class="size"> Pequeña <br>
+			<input type="radio" value="mediana" name="size" class="size"> Mediana <br>
+			<input type="radio" value="grande" name="size" class="size"> Grande <br>
+		</div>
+		<div class="radio">
+		 	Contenido: <br>	
+		 	<textarea name="contenido" id="contenido" cols="30" rows="5" placeholder="Escribe aquí el contenido de la caja" style="font-family: Arial"></textarea>
+		 </div>
+
+		<input type="button" id="caja" value="Enviar" style="vertical-align: center"> <br><br>
+
+		<textarea id="pedido" placeholder="Su pedido aparecerá aquí" cols="30" rows="5" style="font-family: Arial"></textarea>
+	</div>
+
+</form>
+
+<script>
+	const ctof = (c) => (c*9/5+32).toFixed(1);
+	const ftoc = (f) => ((f-32)*5/9).toFixed(1);
+	const etod = (e) => (e*1.12).toFixed(2);
+	const dtoe = (d) => (d*.89).toFixed(2);
+
+	const enviar = (campo1, campo2, func) => {
+		if(document.querySelector(campo1).value == "") return;
+		document.querySelector(campo2).value = func(document.querySelector(campo1).value);
+	}
+
+	document.querySelector('#ctof').addEventListener('click', () => {enviar('#cel','#far',ctof)}); //**
+	document.querySelector('#ftoc').addEventListener('click', () => {enviar('#far2','#cel2',ftoc)});
+	document.querySelector('#etod').addEventListener('click', () => {enviar('#eur','#usd',etod)});
+	document.querySelector('#dtoe').addEventListener('click', () => {enviar('#usd2','#eur2',dtoe)});
+
+	// **dentro del evento, se llama a una función creando una funcion flecha "() => {funcion()}"
+
+	const pedido = () => { 	// la función comprueba que se hayan llenado todos los campos
+		if(document.querySelector('#nombre').value == '' || 
+			document.querySelector('#contenido').value == ''){
+			document.querySelector('#pedido').value = "El nombre y el contenido son campos obligatorios"
+		}else if(document.querySelector('.size:checked') == null){
+			document.querySelector('#pedido').value = "Seleccione el tamaño de la caja"
+		}
+		else{
+			document.querySelector('#pedido').value = document.querySelector('#nombre').value + " ha pedido una caja " + document.querySelector('.size:checked').value + " de " + document.querySelector('#material').value + " que contenga " + document.querySelector('#contenido').value + ".";
+		}
+	}
+
+	document.querySelector('#caja').addEventListener('click', pedido);
+
+</script>
