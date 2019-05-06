@@ -1,0 +1,38 @@
+<style>
+	ul{
+		list-style: none;
+		display: flex;
+		flex-direction: row;
+	}
+	li{
+		padding: 5px 5px;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end; 
+		/*porque al poner "flex-direction:column" el justify pasa a ser vertical y el align horizontal*/
+	}
+	.altura{
+		background-color: gray;
+		width: 50px;
+		margin: 0 auto;
+	}
+	p{
+		height: 2em;
+	}
+</style>
+
+<div class="lista"></div>
+
+<script>
+	fetch('https://swapi.co/api/people/')
+	.then(res => res.json())
+	.then(res => {
+		console.log(res.results)
+		let codigo = '<ul>';
+		res.results.forEach(obj => {
+			codigo += `<li><div class="altura" style="height: ${obj.height}px"></div><p>${obj.name}<p></li>`;
+		});
+		codigo+='</ul>';
+		document.querySelector('.lista').innerHTML = codigo;
+	});
+</script>
