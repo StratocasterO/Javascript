@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="robots" content="noindex, nofollow">
+
+	<title>Pizzas PabloHutt</title>
+	<!-- Latest compiled and minified CSS & JS -->
+	<link rel="stylesheet" media="screen" href="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Skranji" rel="stylesheet">
+	<style>
+		body{
+			background: salmon;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="container">
+		<div class="row" style="padding-bottom:20px">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<h1 style="text-align:center; font-family: 'Skranji', cursive;"><img style="margin: 0 20px; height: 40px" src="https://pablomonteserin.com/wp-content/themes/m/images/pablo-monteserin.png" alt="">Pizzas PabloHutt<img style="margin: 0 20px; height: 40px" src="https://pablomonteserin.com/wp-content/themes/m/images/pablo-monteserin.png" alt=""></h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<form action="">
+					<input name="p" value="pedido" type="hidden">
+
+					<select name="size">
+						<option value="-1">Selecciona una opción, por favor</option>
+						<option value=".8">Pequeña</option>
+						<option value="1">Mediana</option>
+						<option value="1.2">Grande</option>
+
+					</select><br><br>
+					<label for="cod" >Código promocional:</label>
+					<input style="padding-left: 10px; margin-left: 10px;" id="cod" name="cod" type="text" placeholder="Tu código aquí">
+
+					<h2>¿Qué te apetece, bonico?</h2><br>
+					<input id="marg" name="tipo" value="6" type="radio"><label style="padding-left: 10px;" for="mar">Margarita</label> <br>
+					<input id="veg" name="tipo" value="7" type="radio"><label style="padding-left: 10px;" for="veg">Vegetal</label><br>
+					<input id="carb" name="tipo" value="8" type="radio"><label style="padding-left: 10px;" for="carb">Carbonara</label><br>
+					<input id="barb" name="tipo" value="9" type="radio"><label style="padding-left: 10px;" for="barb">Barbacoa</label><br><br>
+					<input id="entrega" name="entrega" type="checkbox"><label style="padding-left: 10px;" for="entrega">Entrega a domicilio</label><br><br><br>
+
+					<input style="padding: 3px 20px;" value="Enviar pedido" name="enviar" type="submit">
+				</form>
+			</div>
+		</div>
+
+		<div class="row" style="padding-bottom:20px">
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<div id="pedido" style="background: gray; margin-top:20px; padding: 20px; color:white; border:2px solid black"></div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		const size = document.querySelector("select");
+		const code = document.querySelector("#cod");
+		const tipo = document.querySelectorAll("input[name=tipo]");
+		const envio = document.querySelector("#entrega");
+
+		const pedido = document.querySelector("#pedido");
+
+		const calcular = () => {
+			console.log("tamaño = " + size.value);
+			console.log("código = " + code.value);
+			console.log("tipo = " + tipo.value);
+			console.log("envio = " + envio.checked);
+
+			if(size.value == -1) pedido.innerHTML = "Selecciona un tamaño, por favor.";
+			
+			let i = 0;
+			document.querySelectorAll("input[name=tipo]").forEach(obj => {
+				if(obj.checked == true) i = 1;
+			});
+
+			let precio = 0;
+
+			if(i == 1 && size.value != -1){
+				tipo.forEach(obj => {
+					if (obj.checked) precioTipo = obj.value;
+				});
+				precio = precioTipo*size.value;
+				if (code.value == "esfamiao") precio *= .6;
+				if (envio.checked == true) precio += 4;
+				pedido.innerHTML = `El coste de tu pedido es de €${precio.toFixed(2)}.`
+			} else pedido.innerHTML = "Selecciona un tipo de pizza y un tamaño, por favor.";
+		};
+
+		document.querySelector("input[name='enviar']").addEventListener("click", (e) => {
+			e.preventDefault();
+			console.log("botón pulsado");
+			calcular();
+		});
+	</script>
+</body>
+</html>
