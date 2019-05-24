@@ -1,0 +1,111 @@
+<script>
+	const usuarios = [
+	{
+		"name" : "Paco",
+		"isActive" : false,
+		"edad": 18
+	},
+	{
+		"name" : "Laura",
+		"isActive" : false,
+		"edad": 21
+	},
+	{
+		"name" : "Raquel",
+		"isActive" : false,
+		"edad": 15
+	},
+	{
+		"name" : "Juan",
+		"isActive" : true,
+		"edad": 17
+	},
+	{
+		"name" : "Alberto",
+		"isActive" : false,
+		"edad": 50
+	},
+	{
+		"name" : "Rodolfo",
+		"isActive" : true,
+		"edad":7
+	},
+	];
+
+	// Método find:
+	console.log('La edad de Rodolfo es:');
+	console.log(usuarios.find(obj => obj.name == 'Rodolfo').edad);
+	
+	// Método filter:
+	console.log('Estos son los usuarios activos:');
+	console.log(usuarios.filter(obj => obj.isActive == true));
+
+	console.log('Estos son los usuarios mayores de edad:');
+	console.log(usuarios.filter(obj => obj.edad >= 18));
+
+	// Método reduce:
+	console.log('Estos son los usuarios:');
+	let users = usuarios.reduce((u,obj) => [...u,obj.name],[]) 
+	// los tres puntos cogen lo que tenía contenido el array
+	console.log(users);
+
+	users = usuarios.reduce((u,obj) => u + obj.name + '\n','')
+	console.log(users);
+
+	const seresVivos = {
+		"humanos":[
+		{
+			"name" : "Paco",
+			"edad": 18
+		},
+		{
+			"name" : "Laura",
+			"edad": 21
+		},
+		{
+			"name" : "Rodolfo",
+			"edad":7
+		}
+		]
+		,
+		"tortugas":[
+		{
+			"name" : "Rafael",
+			"edad": 19
+		},
+		{
+			"name" : "Donatello",
+			"edad": 16
+		},
+		{
+			"name" : "Leonardo",
+			"edad": 17
+		}
+		]
+	};
+
+	const seleccion = [
+	{
+		"name": "humanos",
+		"selected": false
+	},
+	{
+		"name": "tortugas",
+		"selected": true
+	}
+	];
+
+	const result = seleccion.reduce((todosLosAnimales, raza) => {
+		if(raza.selected == true){
+			const animal = seresVivos[raza.name].filter(obj => obj.edad >= 18);
+			return [...todosLosAnimales, ...animal];
+			// con los puntos suspensivos coge los elementos en lugar del array
+		}else{
+			return [...todosLosAnimales];
+		}
+	}, []
+	)
+
+	console.log('Estos son los animales mayores de edad cuya raza tiene selected=true:')
+	console.log(result);
+</script>
