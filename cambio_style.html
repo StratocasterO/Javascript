@@ -1,0 +1,15 @@
+Estos <span class="rojo">botones</span> pintan <span class="verde">palabras</span> de <span class="azul">colores</span> <br>
+
+<button id="r">Rojo</button> 
+<button id="g">Verde</button> 
+<button id="b">Azul</button>
+
+<script>
+	document.querySelector("#r").addEventListener("click", () => {document.querySelector(".rojo").style.backgroundColor = 'pink'})
+
+	document.querySelector("#g").addEventListener("click", () => {document.querySelector(".verde").style.backgroundColor = 'lightgreen'})
+
+	document.querySelector("#b").addEventListener("click", () => {document.querySelector(".azul").style.backgroundColor = 'lightblue'})
+
+	// para elementos con ID se puede escribir hola.metodos() en lugar de document.querySelector("#hola")
+</script>
