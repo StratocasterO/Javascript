@@ -51,7 +51,7 @@ Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas ducimus aperiam q
 	// cierra el lightbox al hacer click fuera del mismo
 	window.addEventListener('click', (e) => { 
 		if (document.querySelector('#black_overlay').style.display == 'block' && !document.querySelector('#lightbox').contains(e.target)){
-			black_overlay.style.display = "none";
+			document.querySelector('#black_overlay').style.display = "none";
 		}
 	});
 </script>
